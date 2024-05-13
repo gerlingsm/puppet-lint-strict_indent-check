@@ -130,6 +130,8 @@ PuppetLint.new_check(:strict_indent) do
                  token.prev_token.value.split("\n").last.length
                elsif !token.prev_token.nil? and token.prev_token.type == :HEREDOC_OPEN
                  next_token.prev_token.value.split("\n").last.length
+               elsif !token.prev_token.nil? and !token.prev_token.prev_token.nil? and token.prev_token.type == :COMMA and token.prev_token.prev_token.type == :HEREDOC_OPEN
+                 next_token.prev_token.prev_token.value.split("\n").last.length
                else
                  0
                end
